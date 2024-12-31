@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Link from "next/link";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import NavItems from "../components/NavItems";
 import { ThemeSwitcher } from "../utils/ThemeSwitcher";
 import CustomModal from "../utils/CustomModal";
@@ -9,6 +9,16 @@ import { HiOutlineMenuAlt3, HiOutlineUserCircle } from "react-icons/hi";
 import Login from "../components/Auth/Login";
 import SignUp from "../components/Auth/SignUp";
 import Verification from "../components/Auth/Verification";
+// import { useSelector } from "react-redux";
+import Image from "next/image";
+import avatar from "../../../public/assets/avatar.jpg";
+import { useSession } from "next-auth/react";
+import {
+  useLoadUserQuery,
+  useLogoutUserQuery,
+  useSocialAuthMutation,
+} from "../../../redux/features/auth/authAPI";
+import toast from "react-hot-toast";
 
 interface Props {
   open: boolean;
@@ -19,6 +29,45 @@ interface Props {
 const Header: FC<Props> = ({ open, setOpen, route, setRoute }) => {
   const [active, setActive] = useState(false);
   const [openSideBar, setOpenSidebar] = useState(false);
+
+  // const { user } = useSelector((state: any) => state.auth);
+  //data from social authentication session
+  const { data } = useSession();
+  const { data: user, isLoading, refetch } = useLoadUserQuery(undefined, {});
+  //data from social authentication session
+  // RTK query for social authentication
+  const [socialAuth, { isSuccess }] = useSocialAuthMutation();
+  const [logout, setlogout] = useState(false);
+  //skip logout query if logout button is not pressed
+  const {} = useLogoutUserQuery(undefined, {
+    skip: !logout ? true : false,
+  });
+
+  useEffect(() => {
+    if (!isLoading) {
+      if (!user) {
+        if (data) {
+          const socialAuthData = {
+            email: data?.user?.email,
+            username: data?.user?.name,
+            avatar: data?.user?.image,
+          };
+          socialAuth(socialAuthData);
+          refetch();
+        }
+      }
+    }
+
+    if (data === null) {
+      if (isSuccess) {
+        toast.success("Successfully logged in");
+      }
+    }
+    if (data === null && !isLoading && !user) {
+      setlogout(true);
+    }
+  }, [data, isLoading, isSuccess, refetch, socialAuth, user]);
+
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 80) {
@@ -28,6 +77,7 @@ const Header: FC<Props> = ({ open, setOpen, route, setRoute }) => {
       }
     });
   }
+
   const handleClose = (e: any) => {
     if (e.target.id === "screen") {
       setOpenSidebar(false);
@@ -63,13 +113,28 @@ const Header: FC<Props> = ({ open, setOpen, route, setRoute }) => {
                   onClick={() => setOpenSidebar(true)}
                 />
               </div>
-              <HiOutlineUserCircle
-                size={25}
-                className="hidden 800px:block cursor-pointer dark:text-white text-black"
-                onClick={() => {
-                  setOpen(true);
-                }}
-              />
+              {user ? (
+                <Link href={"/profile"}>
+                  <Image
+                    src={user?.avatar_url ? user?.avatar_url : avatar}
+                    alt="Profile pic"
+                    width={30}
+                    height={30}
+                    className="w-[30px] h-[30px] rounded-full"
+                    // style={{
+                    //   border: activeItem === 5 ? "2px solid #ffc107" : "none", // border color changes when selected
+                    // }}
+                  />
+                </Link>
+              ) : (
+                <HiOutlineUserCircle
+                  size={25}
+                  className="hidden 800px:block cursor-pointer dark:text-white text-black"
+                  onClick={() => {
+                    setOpen(true);
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -83,16 +148,31 @@ const Header: FC<Props> = ({ open, setOpen, route, setRoute }) => {
             <div className="w-[38%] fixed z-[999999999] h-screen bg-white dark:bg-slate-900 top-0 right-0">
               <NavItems isMobile={true} />
               <div className="w-full items-center justify-center flex">
-                <HiOutlineUserCircle
-                  size={25}
-                  className="800px:flex cursor-pointer dark:text-white text-black"
-                  onClick={() => {
-                    {
-                      setOpen(true);
-                      setOpenSidebar(false);
-                    }
-                  }}
-                />
+                {user ? (
+                  <Link href={"/profile"}>
+                    <Image
+                      src={user?.avatar_url ? user?.avatar_url : avatar}
+                      alt="Profile pic"
+                      width={30}
+                      height={30}
+                      className="w-[30px] h-[30px] rounded-full"
+                      // style={{
+                      //   border: activeItem === 5 ? "2px solid #ffc107" : "none", // border color changes when selected
+                      // }}
+                    />
+                  </Link>
+                ) : (
+                  <HiOutlineUserCircle
+                    size={25}
+                    className="800px:flex cursor-pointer dark:text-white text-black"
+                    onClick={() => {
+                      {
+                        setOpen(true);
+                        setOpenSidebar(false);
+                      }
+                    }}
+                  />
+                )}
               </div>
               <br />
               <p className="text-[16px] px-2 pl-5 text-black dark:text-white">

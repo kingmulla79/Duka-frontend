@@ -1,7 +1,21 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  optimizeFonts: false,
+  minify: false,
+  productionBrowserSourceMaps: false,
+  concurrentFeatures: true,
+  fastRefresh: true,
+  swcMinify: true,
+  reactStrictMode: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "**",
+      },
+    ],
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
