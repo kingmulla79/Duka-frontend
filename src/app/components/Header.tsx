@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Link from "next/link";
@@ -19,21 +20,23 @@ import {
   useSocialAuthMutation,
 } from "../../../redux/features/auth/authAPI";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 interface Props {
   open: boolean;
   setOpen: (open: boolean) => void;
   route: string;
+  activeItem: number;
   setRoute: (route: string) => void;
 }
-const Header: FC<Props> = ({ open, setOpen, route, setRoute }) => {
+const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
   const [active, setActive] = useState(false);
   const [openSideBar, setOpenSidebar] = useState(false);
 
-  // const { user } = useSelector((state: any) => state.auth);
+  const { user } = useSelector((state: any) => state.auth);
   //data from social authentication session
   const { data } = useSession();
-  const { data: user, isLoading, refetch } = useLoadUserQuery(undefined, {});
+  const { refetch } = useLoadUserQuery(undefined, {});
   //data from social authentication session
   // RTK query for social authentication
   const [socialAuth, { isSuccess }] = useSocialAuthMutation();
@@ -44,17 +47,15 @@ const Header: FC<Props> = ({ open, setOpen, route, setRoute }) => {
   });
 
   useEffect(() => {
-    if (!isLoading) {
-      if (!user) {
-        if (data) {
-          const socialAuthData = {
-            email: data?.user?.email,
-            username: data?.user?.name,
-            avatar: data?.user?.image,
-          };
-          socialAuth(socialAuthData);
-          refetch();
-        }
+    if (!user) {
+      if (data) {
+        const socialAuthData = {
+          email: data?.user?.email,
+          username: data?.user?.name,
+          avatar: data?.user?.image,
+        };
+        socialAuth(socialAuthData);
+        refetch();
       }
     }
 
@@ -63,10 +64,10 @@ const Header: FC<Props> = ({ open, setOpen, route, setRoute }) => {
         toast.success("Successfully logged in");
       }
     }
-    if (data === null && !isLoading && !user) {
+    if (data === null && !user) {
       setlogout(true);
     }
-  }, [data, isLoading, isSuccess, refetch, socialAuth, user]);
+  }, [data, isSuccess, refetch, socialAuth, user]);
 
   if (typeof window !== "undefined") {
     window.addEventListener("scroll", () => {
@@ -121,9 +122,9 @@ const Header: FC<Props> = ({ open, setOpen, route, setRoute }) => {
                     width={30}
                     height={30}
                     className="w-[30px] h-[30px] rounded-full"
-                    // style={{
-                    //   border: activeItem === 5 ? "2px solid #ffc107" : "none", // border color changes when selected
-                    // }}
+                    style={{
+                      border: activeItem === 5 ? "2px solid #ffc107" : "none", // border color changes when selected
+                    }}
                   />
                 </Link>
               ) : (
@@ -156,9 +157,9 @@ const Header: FC<Props> = ({ open, setOpen, route, setRoute }) => {
                       width={30}
                       height={30}
                       className="w-[30px] h-[30px] rounded-full"
-                      // style={{
-                      //   border: activeItem === 5 ? "2px solid #ffc107" : "none", // border color changes when selected
-                      // }}
+                      style={{
+                        border: activeItem === 5 ? "2px solid #ffc107" : "none", // border color changes when selected
+                      }}
                     />
                   </Link>
                 ) : (

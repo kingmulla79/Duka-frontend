@@ -9,16 +9,23 @@ import { useSelector } from "react-redux";
 const Page: FC = () => {
   const [open, setOpen] = useState(false);
   const [route, setRoute] = useState("Login");
+  const [activeItem, setactiveItem] = useState(0);
   const { user } = useSelector((state: any) => state.auth);
 
   return (
     <div>
       <Heading
         title="Ecommerce Homepage"
-        description="E-commerce homepage"
+        description="Ecommerce homepage"
         keywords="Shop, home"
       />
-      <Header open={open} setOpen={setOpen} route={route} setRoute={setRoute} />
+      <Header
+        open={open}
+        setOpen={setOpen}
+        activeItem={activeItem}
+        route={route}
+        setRoute={setRoute}
+      />
       {user && <h1>Hello {user.username}</h1>}
     </div>
   );
