@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { redirect } from "next/navigation";
-import UserAuth from "./userAuth";
 import React from "react";
+import { useSelector } from "react-redux";
 
 interface ProtectedProps {
   children: React.ReactNode;
@@ -8,6 +9,6 @@ interface ProtectedProps {
 
 //used for protected routes
 export default function Protected({ children }: ProtectedProps) {
-  const isAuthenticated = UserAuth(); //true for signed in users
-  return isAuthenticated ? children : redirect("/");
+  const { user } = useSelector((state: any) => state.auth);
+  return user ? children : redirect("/");
 }

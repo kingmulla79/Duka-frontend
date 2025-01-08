@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
-import { styles } from "../../../app/styles/style";
 import React, { FC, useEffect, useState } from "react";
 import { AiOutlineCamera } from "react-icons/ai";
 import avatarIcon from "../../../../public/assets/avatar.jpg";
@@ -11,6 +10,9 @@ import {
 
 import { useLoadUserQuery } from "../../../../redux/features/auth/authAPI";
 import toast from "react-hot-toast";
+import { Button } from "@mui/material";
+import UpdateIcon from "@mui/icons-material/Update";
+import TextField from "@mui/material/TextField";
 
 type Props = {
   avatar: string | null;
@@ -26,6 +28,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
 
   const [usernameError, setUsernameError] = useState("");
   const [phoneError, setPhoneError] = useState("");
+  const [updateSuccess, setUpdateSuccess] = useState(false);
 
   const [updateProfilePic, { isSuccess, error: update_error }] =
     useUpdateProfilePicMutation();
@@ -69,6 +72,9 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
       refetch();
       toast.success("Information successfully updated");
     }
+    if (success) {
+      setUpdateSuccess(true);
+    }
     if (error) {
       if ("data" in error) {
         const errorData = error as any;
@@ -81,7 +87,7 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
         toast.error(errorData?.data?.message);
       }
     }
-  }, [error, isSuccess, refetch, success, update_error]);
+  }, [error, isSuccess, refetch, success, update_error, setUpdateSuccess]);
 
   return (
     <>
@@ -117,15 +123,13 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
       <div className="w-full pl-6 800px:pl-10">
         <form onSubmit={handleSubmit}>
           <div className="800px:w-[50%] m-auto block pb-4">
-            <div className="w-[100%]">
-              <label className="block pb-2 dark:text-white text-black">
-                Username
-              </label>
-              <input
-                type="text"
-                className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+            <div className="w-[100%] pb-10">
+              <TextField
                 required
-                value={username}
+                variant="outlined"
+                label="Username"
+                className="!w-[95%]"
+                defaultValue={username}
                 onFocus={() => setUsernameError("")}
                 onChange={(e) => setUsername(e.target.value)}
               />
@@ -133,15 +137,13 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
                 <span className="text-red-500 block">{usernameError}</span>
               )}
             </div>
-            <div className="w-[100%]">
-              <label className="block pb-2 dark:text-white text-black">
-                Phone
-              </label>
-              <input
-                type="text"
-                className={`${styles.input} !w-[95%] mb-4 800px:mb-0`}
+            <div className="w-[100%] pb-10">
+              <TextField
                 required
-                value={phone}
+                variant="outlined"
+                label="Phone"
+                className="!w-[95%]"
+                defaultValue={phone}
                 onFocus={() => setPhoneError("")}
                 onChange={(e) => setPhone(e.target.value)}
               />
@@ -150,23 +152,48 @@ const ProfileInfo: FC<Props> = ({ avatar, user }) => {
               )}
             </div>
             <div className="w-[100%] pt-2">
-              <label className="block pb-2 dark:text-white text-black">
-                Email Address
-              </label>
-              <input
-                type="text"
-                readOnly
-                className={`${styles.input} !w-[95%] mb-1 800px:mb-0`}
-                required
-                value={user?.email}
+              <TextField
+                variant="outlined"
+                label="Email Address"
+                className="!w-[95%]"
+                defaultValue={user?.email}
+                slotProps={{
+                  input: {
+                    readOnly: true,
+                  },
+                }}
               />
             </div>
-            <input
+            <div className="items-center justify-center mt-8">
+              {updateSuccess ? (
+                <>
+                  <Button
+                    variant="contained"
+                    color="success"
+                    onClick={() => setUpdateSuccess(false)}
+                  >
+                    Success
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    variant="contained"
+                    startIcon={<UpdateIcon />}
+                    onClick={handleSubmit}
+                  >
+                    Update
+                  </Button>
+                </>
+              )}
+            </div>
+
+            {/* <input
               className={`w-full 800px:w-[250px] h-[40px] border border-[#37a39a] text-center dark:text-[#fff] text-black rounded-[3px] mt-8 cursor-pointer`}
               required
               value="Update"
               type="submit"
-            />
+            /> */}
           </div>
         </form>
         <br />

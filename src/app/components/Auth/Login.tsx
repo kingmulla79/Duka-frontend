@@ -16,6 +16,10 @@ import toast from "react-hot-toast";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import { signIn } from "next-auth/react";
+import TextField from "@mui/material/TextField";
+import { IconButton } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 type Props = {
   open: boolean;
@@ -62,47 +66,46 @@ const Login: FC<Props> = ({ open, setRoute, setOpen }) => {
     <div className="w-full">
       <h1 className={`${styles.title}`}>Login to Eccommerce App</h1>
       <form onSubmit={handleSubmit}>
-        <label className={`${styles.label}`}>Enter your email</label>
-        <input
-          type="email"
-          name=""
-          value={values.email}
-          onChange={handleChange}
-          id="email"
-          placeholder="username@domain.com"
-          className={`${errors.email && touched.email && "border-red-500"} ${
-            styles.input
-          }`}
-        />
+        <div className="w-full mt-5 relative">
+          <TextField
+            required
+            type="email"
+            variant="outlined"
+            label="Enter your email"
+            className={`w-full ${
+              errors.email && touched.email && "border-red-500"
+            }`}
+            id="email"
+            defaultValue={values.email}
+            placeholder="useremail@domain.com"
+            onChange={handleChange}
+          />
+        </div>
+
         {errors.email && touched.email && (
           <span className="text-red-500 pt-2 block">{errors.email}</span>
         )}
-        <div className="w-full mt-5 relative mb-1">
-          <label className={`${styles.label}`}>Enter your password</label>
-          <input
-            type={!show ? "password" : "text"}
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-            id="password"
-            placeholder="********"
-            className={`${
+        <div className="pl-1 w-full mt-6 relative mb-3 flex justify-items-center">
+          <TextField
+            required
+            type={`${show ? "text" : "password"}`}
+            variant="standard"
+            label="Enter your password"
+            className={`w-full ${
               errors.password && touched.password && "border-red-500"
-            } ${styles.input}`}
+            }`}
+            id="password"
+            defaultValue={values.password}
+            placeholder={`${show ? "UniquePassword!123" : "***************"}`}
+            onChange={handleChange}
           />
-          {!show ? (
-            <AiOutlineEyeInvisible
-              className="absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white"
-              size={20}
-              onClick={() => setShow(true)}
-            />
-          ) : (
-            <AiOutlineEye
-              className="absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white"
-              size={20}
-              onClick={() => setShow(false)}
-            />
-          )}
+          <IconButton
+            aria-label="password-visibility"
+            onClick={() => setShow(!show)}
+            className={`absolute cursor-pointer text-black dark:text-white`}
+          >
+            {show ? <VisibilityOffIcon /> : <VisibilityIcon />}
+          </IconButton>
         </div>
         {errors.password && touched.password && (
           <span className="text-red-500 pt-2 block">{errors.password}</span>

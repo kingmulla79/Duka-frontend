@@ -4,21 +4,37 @@
 import React, { FC, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {
-  AiFillGithub,
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-} from "react-icons/ai";
+import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { styles } from "../../../app/styles/style";
 import { useRegisterMutation } from "../../../../redux/features/auth/authAPI";
 import toast from "react-hot-toast";
 // import { signIn } from "next-auth/react";
+import TextField from "@mui/material/TextField";
+import { IconButton } from "@mui/material";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Button from "@mui/material/Button";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { styled } from "@mui/material/styles";
+import Image from "next/image";
+import avatarIcon from "../../../../public/assets/avatar.jpg";
 
 type Props = {
   setRoute: (route: string) => void;
 };
 
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
 const schema = Yup.object().shape({
   username: Yup.string()
     .required("Please enter your username")
@@ -54,7 +70,20 @@ const schema = Yup.object().shape({
 
 const SignUp: FC<Props> = ({ setRoute }) => {
   const [show, setShow] = useState(false);
+  const [userAvatar, setUserAvatar] = useState<any | null>("");
   const [register, { data, error, isSuccess }] = useRegisterMutation();
+
+  const imageHandler = async (e: any) => {
+    const fileReader = new FileReader();
+
+    fileReader.onload = () => {
+      if (fileReader.readyState === 2) {
+        const profile_avatar = fileReader.result;
+        setUserAvatar(profile_avatar);
+      }
+    };
+    fileReader.readAsDataURL(e.target.files[0]);
+  };
 
   useEffect(() => {
     if (isSuccess) {
@@ -71,14 +100,21 @@ const SignUp: FC<Props> = ({ setRoute }) => {
   }, [isSuccess, error, data?.message, setRoute]);
 
   const formik = useFormik({
-    initialValues: { username: "", email: "", password: "", phone: "" },
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+      phone: "",
+      avatar: "",
+    },
     validationSchema: schema,
-    onSubmit: async ({ email, password, username, phone }) => {
+    onSubmit: async ({ email, password, username, phone, avatar }) => {
       const data = {
         email,
         password,
         username,
         phone,
+        avatar: userAvatar,
       };
       await register(data);
     },
@@ -89,89 +125,104 @@ const SignUp: FC<Props> = ({ setRoute }) => {
     <div className="w-full">
       <h1 className={`${styles.title}`}>Signup with QuizzHacks</h1>
       <form onSubmit={handleSubmit}>
-        <div className="w-full mt-1 relative mb-1">
-          <label className={`${styles.label}`}>Enter your username</label>
-          <input
-            type="text"
-            name=""
-            value={values.username}
-            onChange={handleChange}
+        <div className="w-full mt-3 relative mb-3">
+          <TextField
+            required
+            type="username"
+            variant="outlined"
+            label="Enter your username"
+            className={`w-full`}
             id="username"
+            defaultValue={values.username}
             placeholder="username"
-            className={`${
-              errors.username && touched.username && "border-red-500"
-            } ${styles.input}`}
+            onChange={handleChange}
           />
           {errors.username && touched.username && (
             <span className="text-red-500 block">{errors.username}</span>
           )}
         </div>
-        <div className="w-full mt-1 relative mb-1">
-          <label className={`${styles.label}`}>Enter your email</label>
-          <input
+        <div className="w-full mt-3 relative mb-3">
+          <TextField
+            required
             type="email"
-            name=""
-            value={values.email}
-            onChange={handleChange}
-            id="email"
-            placeholder="loginmail@gmail.com"
-            className={`${errors.email && touched.email && "border-red-500"} ${
-              styles.input
+            variant="outlined"
+            label="Enter your email"
+            className={`w-full ${
+              errors.email && touched.email && "border-red-500"
             }`}
+            id="email"
+            defaultValue={values.email}
+            placeholder="useremail@domain.com"
+            onChange={handleChange}
           />
           {errors.email && touched.email && (
             <span className="text-red-500 block">{errors.email}</span>
           )}
         </div>
 
-        <div className="w-full mt-1 relative mb-1">
-          <label className={`${styles.label}`}>Enter your phone number</label>
-          <input
+        <div className="w-full mt-3 relative mb-3">
+          <TextField
+            required
             type="text"
-            name=""
-            value={values.phone}
-            onChange={handleChange}
-            id="phone"
-            placeholder="07*****,01*****"
-            className={`${errors.phone && touched.phone && "border-red-500"} ${
-              styles.input
+            variant="outlined"
+            label="Enter your phone number"
+            className={`w-full ${
+              errors.phone && touched.phone && "border-red-500"
             }`}
+            id="phone"
+            defaultValue={values.phone}
+            placeholder="07*****,01*****"
+            onChange={handleChange}
           />
         </div>
         {errors.phone && touched.phone && (
           <span className="text-red-500 block">{errors.phone}</span>
         )}
 
-        <div className="w-full mt-1 relative mb-2">
-          <label className={`${styles.label}`}>Enter your password</label>
-          <input
-            type={!show ? "password" : "text"}
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-            id="password"
-            placeholder="********"
-            className={`${
+        <div className="pl-1 w-full mt-6 relative mb-3 flex justify-items-center">
+          <TextField
+            required
+            type={`${show ? "text" : "password"}`}
+            variant="standard"
+            label="Enter your password"
+            className={`w-full ${
               errors.password && touched.password && "border-red-500"
-            } ${styles.input}`}
+            }`}
+            id="password"
+            defaultValue={values.password}
+            placeholder={`${show ? "UniquePassword!123" : "***************"}`}
+            onChange={handleChange}
           />
-          {!show ? (
-            <AiOutlineEyeInvisible
-              className="absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white"
-              size={20}
-              onClick={() => setShow(true)}
-            />
-          ) : (
-            <AiOutlineEye
-              className="absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white"
-              size={20}
-              onClick={() => setShow(false)}
-            />
-          )}
+          <IconButton
+            aria-label="password-visibility"
+            onClick={() => setShow(!show)}
+            className={`absolute cursor-pointer text-black dark:text-white`}
+          >
+            {show ? <VisibilityOffIcon /> : <VisibilityIcon />}
+          </IconButton>
         </div>
         {errors.password && touched.password && (
           <span className="text-red-500 mb-2 block">{errors.password}</span>
         )}
+        <div className="w-full mt-6 relative mb-3 px-11 flex justify-items-center justify-around">
+          <Button
+            component="label"
+            role={undefined}
+            variant="contained"
+            tabIndex={-1}
+            startIcon={<CloudUploadIcon />}
+          >
+            Upload files
+            <VisuallyHiddenInput type="file" onChange={imageHandler} multiple />
+          </Button>
+          <Image
+            src={userAvatar ? userAvatar : avatarIcon}
+            alt=""
+            width={50}
+            height={50}
+            className="w-[50px] h-[50px] cursor-pointer border-[3px] border-[#37a39a] rounded-full"
+          />
+        </div>
         <div className="w-full mt-5">
           <input type="submit" value="Signup" className={`${styles.button}`} />
         </div>
