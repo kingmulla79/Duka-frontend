@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable jsx-a11y/role-supports-aria-props */
-import { styles } from "@/app/styles/style";
+
 import { useUpdatePasswordMutation } from "../../../../redux/features/auth/authAPI";
 import React, { FC, useEffect, useState } from "react";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import toast from "react-hot-toast";
+import { Button } from "@mui/material";
+import UpdateIcon from "@mui/icons-material/Update";
+import TextField from "@mui/material/TextField";
+import IconButton from "@mui/material/IconButton";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 const ChangePassword: FC = () => {
   const PWD_REGEX =
@@ -16,6 +21,7 @@ const ChangePassword: FC = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [updateSuccess, setUpdateSuccess] = useState(false);
   const [updatePassword, { isSuccess, error }] = useUpdatePasswordMutation();
 
   const passwordChangeHandler = async (e: any) => {
@@ -34,6 +40,8 @@ const ChangePassword: FC = () => {
   useEffect(() => {
     if (isSuccess) {
       // load current changes for user
+
+      setUpdateSuccess(true);
       toast.success("Information successfully updated");
     }
     if (error) {
@@ -56,86 +64,88 @@ const ChangePassword: FC = () => {
           onSubmit={passwordChangeHandler}
           className="flex flex-col items-center"
         >
-          <div className="w-[100%] 800px:w-[60%] relative mt-5">
-            <label className={`${styles.label}`}>Enter your old password</label>
-            <input
-              type={showOldPsw ? "text" : "password"}
-              className={`${styles.input}`}
+          <div className="w-[100%] 800px:w-[60%] flex justify-items-center mt-5">
+            <TextField
               required
+              variant="standard"
+              label="Enter your old password"
+              className="!w-[95%]"
               value={oldPassword}
+              type={showOldPsw ? "text" : "password"}
               onChange={(e) => setOldPassword(e.target.value)}
             />
-            {showOldPsw ? (
-              <AiOutlineEye
-                className="absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white"
-                size={20}
-                onClick={() => setShowOldPsw(false)}
-              />
-            ) : (
-              <AiOutlineEyeInvisible
-                className="absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white"
-                size={20}
-                onClick={() => setShowOldPsw(true)}
-              />
-            )}
+            <IconButton
+              aria-label="password-visibility"
+              onClick={() => setShowOldPsw(!showOldPsw)}
+              className={`absolute cursor-pointer text-black dark:text-white`}
+            >
+              {showOldPsw ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </IconButton>
           </div>
-          <div className="w-[100%] 800px:w-[60%] relative mt-5">
-            <label className="block pb-2 text-black dark:text-[#fff]">
-              Enter your new password
-            </label>
-            <input
-              type={showNewPsw ? "text" : "password"}
-              className={`${styles.input}`}
+          <div className="w-[100%] 800px:w-[60%] flex justify-items-center mt-5">
+            <TextField
               required
+              variant="standard"
+              label="Enter your new password"
+              className="!w-[95%]"
               value={newPassword}
+              type={showNewPsw ? "text" : "password"}
               onChange={(e) => setNewPassword(e.target.value)}
             />
-            {showNewPsw ? (
-              <AiOutlineEye
-                className="absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white"
-                size={20}
-                onClick={() => setShowNewPsw(false)}
-              />
-            ) : (
-              <AiOutlineEyeInvisible
-                className="absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white"
-                size={20}
-                onClick={() => setShowNewPsw(true)}
-              />
-            )}
+            <IconButton
+              aria-label="password-visibility"
+              onClick={() => setShowNewPsw(!showNewPsw)}
+              className={`absolute cursor-pointer text-black dark:text-white`}
+            >
+              {showNewPsw ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </IconButton>
           </div>
-          <div className="w-[100%] 800px:w-[60%] relative mt-5">
-            <label className="block pb-2 Otext-black dark:text-[#fff] text-black">
-              Enter your confirm password
-            </label>
-            <input
-              type={showCnfPwd ? "text" : "password"}
-              className={`${styles.input}`}
+          <div className="w-[100%] 800px:w-[60%] flex justify-items-center mt-5">
+            <TextField
               required
+              variant="standard"
+              label="Confirm your new password"
+              className="!w-[95%]"
               value={confirmPassword}
+              type={showCnfPwd ? "text" : "password"}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            {showCnfPwd ? (
-              <AiOutlineEye
-                className="absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white"
-                size={20}
-                onClick={() => setShowCnfPsw(false)}
-              />
-            ) : (
-              <AiOutlineEyeInvisible
-                className="absolute bottom-3 right-2 z-1 cursor-pointer text-black dark:text-white"
-                size={20}
-                onClick={() => setShowCnfPsw(true)}
-              />
-            )}
+            <IconButton
+              aria-label="password-visibility"
+              onClick={() => setShowCnfPsw(!showCnfPwd)}
+              className={`absolute cursor-pointer text-black dark:text-white`}
+            >
+              {showCnfPwd ? <VisibilityOffIcon /> : <VisibilityIcon />}
+            </IconButton>
           </div>
+
           <div className="w-[100%] 800px:w-[60%] relative mt-5">
-            <input
-              className={`w-[95%] h-[40px] border border-[#37a39a] text-center dark:text-[#fff] text-black rounded-[3px] mt-8 cursor-pointer`}
-              value="Update"
-              required
-              type="submit"
-            />
+            {updateSuccess ? (
+              <>
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={() => {
+                    setConfirmPassword("");
+                    setNewPassword("");
+                    setOldPassword("");
+                    setUpdateSuccess(false);
+                  }}
+                >
+                  Success
+                </Button>
+              </>
+            ) : (
+              <>
+                <Button
+                  variant="contained"
+                  startIcon={<UpdateIcon />}
+                  onClick={passwordChangeHandler}
+                >
+                  Update
+                </Button>
+              </>
+            )}
           </div>
         </form>
       </div>

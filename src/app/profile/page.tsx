@@ -21,12 +21,12 @@ const page: FC = () => {
 
   return (
     <Protected>
+      <Heading
+        title={`${user.username} profile - Ecommerce`}
+        description="Ecommerce profile page for users"
+        keywords="Profile, Ecommerce Profile"
+      />
       <div className="min-h-screen">
-        <Heading
-          title={`${user.username} profile - Ecommerce`}
-          description="Ecommerce profile page for users"
-          keywords="Profile, Ecommerce Profile"
-        />
         <Header
           open={open}
           setOpen={setOpen}

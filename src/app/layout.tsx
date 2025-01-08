@@ -8,6 +8,7 @@ import { Providers } from "./Provider";
 import { SessionProvider } from "next-auth/react";
 import { useLoadUserQuery } from "../../redux/features/auth/authAPI";
 import Loader from "./components/Loader/Loader";
+import { CustomMUIThemeProvider } from "./utils/MUIThemeProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -34,8 +35,10 @@ export default function RootLayout({
         <Providers>
           <SessionProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <Custom>{children}</Custom>
-              <Toaster position="top-center" reverseOrder={false} />
+              <CustomMUIThemeProvider>
+                <Custom>{children}</Custom>
+                <Toaster position="top-center" reverseOrder={false} />
+              </CustomMUIThemeProvider>
             </ThemeProvider>
           </SessionProvider>
         </Providers>
