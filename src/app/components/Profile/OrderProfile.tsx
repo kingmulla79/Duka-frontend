@@ -61,6 +61,7 @@ const OrderProfile = () => {
   {
     userOrders &&
       userOrders.forEach((item: any) => {
+        let createdAt = new Date(item.timestamp);
         rows.push({
           id: item.id,
           order_status: item.order_status,
@@ -68,7 +69,12 @@ const OrderProfile = () => {
           total_order_price: item.total_order_price,
           payment_service: item.payment_info.service,
           payment_method: item.payment_info.payment_method,
-          created_at: new Date(item.timestamp),
+          created_at: createdAt.toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }),
         });
       });
   }
