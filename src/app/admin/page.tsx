@@ -3,6 +3,7 @@ import React from "react";
 import AdminProtected from "../hooks/adminProtected";
 import Heading from "../utils/Heading";
 import AdminSidebar from "../components/Admin/sidebar/AdminSideBar";
+import DashboardHero from "../components/Admin/DashboardHero";
 
 const page = () => {
   return (
@@ -15,6 +16,9 @@ const page = () => {
       <div className="flex h-[200vh]">
         <div className="1500px:w-[16%] w-1/5">
           <AdminSidebar />
+        </div>
+        <div className="w-[85%]">
+          <DashboardHero isDashboard={true} />
         </div>
       </div>
     </AdminProtected>

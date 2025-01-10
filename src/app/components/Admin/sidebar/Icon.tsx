@@ -6,18 +6,16 @@ import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import GroupsIcon from "@mui/icons-material/Groups";
-import { BsSearch } from "react-icons/bs";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import VerifiedIcon from "@mui/icons-material/Verified";
-import CreateIcon from "@mui/icons-material/Create";
 import WebIcon from "@mui/icons-material/Web";
 import QuizIcon from "@mui/icons-material/Quiz";
 import WysiwygIcon from "@mui/icons-material/Wysiwyg";
-import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import { IoAddCircle } from "react-icons/io5";
-import { FaClipboardList } from "react-icons/fa";
+import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import PeopleAltOutlinedIcon from "@mui/icons-material/PeopleAltOutlined";
 export {
   HomeOutlinedIcon,
   ArrowForwardIosIcon,
@@ -28,15 +26,13 @@ export {
   PaymentsIcon,
   GroupsIcon,
   VerifiedIcon,
-  CreateIcon,
   WebIcon,
   QuizIcon,
   WysiwygIcon,
-  ManageHistoryIcon,
   SettingsIcon,
   ExitToAppIcon,
   ArrowBackIcon,
-  BsSearch,
-  IoAddCircle,
-  FaClipboardList,
+  SearchOutlinedIcon,
+  AddCircleOutlineOutlinedIcon,
+  PeopleAltOutlinedIcon,
 };

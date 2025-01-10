@@ -14,11 +14,12 @@ import {
   BarChartOutlinedIcon,
   PaymentsIcon,
   GroupsIcon,
-  CreateIcon,
-  ManageHistoryIcon,
   ArrowBackIcon,
   ExitToAppIcon,
-  BsSearch,
+  AddCircleOutlineOutlinedIcon,
+  SearchOutlinedIcon,
+  QuizIcon,
+  PeopleAltOutlinedIcon,
 } from "./Icon";
 import avatarDefault from "../../../../../public/assets/avatar.jpg";
 import { useSelector } from "react-redux";
@@ -27,8 +28,6 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useLogoutUserQuery } from "../../../../../redux/features/auth/authAPI";
 import { redirect } from "next/navigation";
-
-// React pro sidebar used to create this component
 
 interface itemProps {
   title: string;
@@ -166,7 +165,7 @@ const Sidebar = () => {
                   sx={{ m: "10px 0 0 0" }}
                   className="!text-[20px] text-black dark:text-[#ffffffc1] capitalize"
                 >
-                  {user?.role}
+                  {user?.user_role}
                 </Typography>
               </Box>
             </Box>
@@ -195,7 +194,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Invoices"
+              title="Orders"
               to="/admin/payments"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
@@ -209,33 +208,19 @@ const Sidebar = () => {
               {!isCollapsed && "Content"}
             </Typography>
             <Item
-              title="Upload Papers"
-              to="/admin/upload-papers"
-              icon={<CreateIcon />}
+              title="Add Products"
+              to="/admin/add-products"
+              icon={<AddCircleOutlineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Search Papers"
+              title="Search Products"
               to="/admin/papers"
-              icon={<BsSearch />}
+              icon={<SearchOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            {/* <Item
-              title="All Courses"
-              to="/admin/all-courses"
-              icon={<FaClipboardList />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Edit Courses"
-              to="/admin/courses"
-              icon={<IoAddCircle />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
             <Typography
               variant="h5"
               className="!text-[18px] text-black dark:text-[#ffffffc1] capitalize !font-[400]"
@@ -246,31 +231,25 @@ const Sidebar = () => {
             <Item
               title="Team"
               to="/admin/team"
-              icon={<BsSearch />}
+              icon={<SearchOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            {/* <Typography
+            <Typography
               variant="h5"
               className="!text-[18px] text-black dark:text-[#ffffffc1] capitalize !font-[400]"
               sx={{ m: "15px 0 5px 20px" }}
             >
               {!isCollapsed && "Customization"}
             </Typography>
-            <Item
-              title="Hero"
-              to="/admin/hero"
-              icon={<WebIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+
             <Item
               title="FAQ"
               to="/admin/faq"
               icon={<QuizIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
+            />
             <Typography
               variant="h6"
               className="!text-[18px] text-black dark:text-[#ffffffc1] capitalize !font-[400]"
@@ -279,15 +258,15 @@ const Sidebar = () => {
               {!isCollapsed && "Analytics"}
             </Typography>
             <Item
-              title="Paper Analytics"
-              to="/admin/paper-analytics"
+              title="Product Analytics"
+              to="/admin/product-analytics"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Payment Analytics"
-              to="/admin/payment-analytics"
+              title="Order Analytics"
+              to="/admin/order-analytics"
               icon={<PaymentsIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -295,7 +274,7 @@ const Sidebar = () => {
             <Item
               title="Users Analytics"
               to="/admin/users-analytics"
-              icon={<ManageHistoryIcon />}
+              icon={<PeopleAltOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
