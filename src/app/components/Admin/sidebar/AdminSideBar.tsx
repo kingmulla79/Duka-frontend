@@ -108,7 +108,7 @@ const Sidebar = () => {
           top: 0,
           left: 0,
           height: "100vh",
-          width: isCollapsed ? "0%" : "16%",
+          width: isCollapsed ? "0%" : "5%",
         }}
       >
         <Menu iconShape="square">
@@ -171,7 +171,7 @@ const Sidebar = () => {
             </Box>
           )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "5%"}>
+          <Box paddingLeft={isCollapsed ? undefined : "2%"}>
             <Item
               title="Dashboard"
               to="/admin"
@@ -195,7 +195,7 @@ const Sidebar = () => {
             />
             <Item
               title="Orders"
-              to="/admin/payments"
+              to="/admin/orders"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

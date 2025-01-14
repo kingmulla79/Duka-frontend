@@ -55,7 +55,19 @@ export function CustomMUIThemeProvider({ children }: ProviderProps) {
                 borderColor: "#1976d2",
                 backgroundColor: `${theme === "dark" ? "#475569" : "#e7e7e7"}`,
               },
+              "&:hover:not(.Mui-focused)": {
+                "&:before": {
+                  borderColor: `${theme === "dark" ? "#b8c1ce" : "#000"}`,
+                },
+                "&:after": {
+                  borderColor: `${theme === "dark" ? "#b8c1ce" : "#000"}`,
+                },
+              },
+              "&.Mui-focused": {
+                backgroundColor: `${theme === "dark" ? "#475569" : "#e7e7e7"}`,
+              },
             },
+
             "& .MuiInputLabel-filled": {
               color: `${theme === "dark" ? "#fff" : "#000"}`,
               fontFamily: "Poppins",
@@ -88,6 +100,88 @@ export function CustomMUIThemeProvider({ children }: ProviderProps) {
               "&.Mui-focused": {
                 color: `${theme === "dark" ? "#fff" : "#000"}`,
               },
+            },
+          },
+        },
+      },
+      MuiTypography: {
+        styleOverrides: {
+          root: {
+            "& .MuiTypography-root": {
+              color: `${theme === "dark" ? "#fff" : "#000"}`,
+              fontWeight: "bold",
+              fontFamily: "Poppins",
+            },
+          },
+        },
+      },
+      MuiRating: {
+        styleOverrides: {
+          root: {
+            fill: `${theme === "dark" ? "#fff" : "#000"}`,
+            textDecorationColor: `${theme === "dark" ? "#fff" : "#000"}`,
+          },
+        },
+      },
+      MuiFilledInput: {
+        styleOverrides: {
+          root: {
+            color: `${theme === "dark" ? "#fff" : "#000"}`,
+            fontWeight: "bold",
+            fontFamily: "Poppins",
+            backgroundColor: `${theme === "dark" ? "#475569" : "#e7e7e7"}`,
+            ":hover:not(.Mui-focused)": {
+              "&:before": {
+                borderColor: `${theme === "dark" ? "#e7e7e7" : "#000"}`,
+              },
+              "&:after": {
+                borderColor: `${theme === "dark" ? "#e7e7e7" : "#000"}`,
+              },
+              "&.Mui-focused": {
+                backgroundColor: `${theme === "dark" ? "#475569" : "#e7e7e7"}`,
+              },
+            },
+          },
+        },
+      },
+      MuiInputAdornment: {
+        styleOverrides: {
+          root: {
+            color: `${theme === "dark" ? "#fff" : "#000"}`,
+            fontWeight: "bold",
+            fontFamily: "Poppins",
+            backgroundColor: `${theme === "dark" ? "#475569" : "#e7e7e7"}`,
+          },
+        },
+      },
+      MuiInputLabel: {
+        styleOverrides: {
+          root: {
+            color: `${theme === "dark" ? "#fff" : "#000"}`,
+            fontWeight: "bold",
+            fontFamily: "Poppins",
+            // backgroundColor: `${theme === "dark" ? "#475569" : "#e7e7e7"}`,
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            color: `${theme === "dark" ? "#fff" : "#000"}`,
+            fontWeight: "bold",
+            fontFamily: "Poppins",
+            backgroundColor: `${theme === "dark" ? "#475569" : "#e7e7e7"}`,
+          },
+        },
+      },
+      MuiMenuItem: {
+        styleOverrides: {
+          root: {
+            "& .MuiMenuItem-root": {
+              color: `${theme === "dark" ? "#fff" : "#000"}`,
+              fontWeight: "bold",
+              fontFamily: "Poppins",
+              backgroundColor: `${theme === "dark" ? "#475569" : "#e7e7e7"}`,
             },
           },
         },

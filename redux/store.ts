@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./features/api/apiSlice";
 import authSlice from "./features/auth/authSlice";
 import orderSlice from "./features/orders/ordersSlice";
+import productsSlice from "./features/products/productsSlice";
 import { authAPI } from "./features/auth/authAPI";
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authSlice,
     order: orderSlice,
+    products: productsSlice,
   },
   devTools: false, // disables redux devtools
   middleware: (getDefaultMiddleware) =>
