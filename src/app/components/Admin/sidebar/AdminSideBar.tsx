@@ -216,7 +216,7 @@ const Sidebar = () => {
             />
             <Item
               title="Search Products"
-              to="/admin/papers"
+              to="/admin/search-products"
               icon={<SearchOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

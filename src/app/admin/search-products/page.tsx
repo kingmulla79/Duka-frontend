@@ -4,7 +4,7 @@ import AdminProtected from "../../hooks/adminProtected";
 import Heading from "../../utils/Heading";
 import AdminSidebar from "../../components/Admin/sidebar/AdminSideBar";
 import DashboardHero from "../../components/Admin/DashboardHero";
-import AddProducts from "../../components/Admin/Products/AddProducts";
+import SearchProducts from "../../components/Admin/Products/SearchProducts";
 
 const page = () => {
   return (
@@ -20,7 +20,7 @@ const page = () => {
         </div>
         <div className="w-[85%]">
           <DashboardHero isDashboard={true} />
-          <AddProducts />
+          <SearchProducts />
         </div>
       </div>
     </AdminProtected>

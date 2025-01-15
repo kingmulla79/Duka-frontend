@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiSlice } from "../api/apiSlice";
-import { allProductsRequest, updateProducts } from "./productsSlice";
+import {
+  allCategories,
+  allProductsRequest,
+  updateProducts,
+} from "./productsSlice";
 
 export const productAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -81,6 +85,18 @@ export const productAPI = apiSlice.injectEndpoints({
         method: "GET",
         credentials: "include" as const,
       }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          dispatch(
+            allCategories({
+              product_categories: result.data.product_categories,
+            })
+          );
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
     }),
     updateProductCategory: builder.mutation({
       query: (data) => ({

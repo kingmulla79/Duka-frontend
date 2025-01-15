@@ -86,7 +86,7 @@ const DashboardHeader: FC<Props> = ({ open, setOpen }) => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <div className="w-[350px] h-[40vh] dark:bg-[#111C43] bg-white shadow-xl absolute top-20 rounded block right-4">
+          <div className="w-[350px] h-fit dark:bg-[#111C43] bg-white shadow-xl absolute top-20 rounded block right-4">
             <Box>
               <h5 className="text-center text-[20px] font-Poppins text-black dark:text-white p-3">
                 Notifications
