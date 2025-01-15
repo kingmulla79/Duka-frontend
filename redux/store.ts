@@ -5,6 +5,7 @@ import authSlice from "./features/auth/authSlice";
 import orderSlice from "./features/orders/ordersSlice";
 import productsSlice from "./features/products/productsSlice";
 import { authAPI } from "./features/auth/authAPI";
+import { productAPI } from "./features/products/productsAPI";
 
 export const store = configureStore({
   reducer: {
@@ -23,5 +24,6 @@ const initializeApp = async () => {
   await store.dispatch(
     authAPI.endpoints.loadUser.initiate({}, { forceRefetch: true })
   );
+  await store.dispatch(productAPI.endpoints.getProductCategories.initiate({}));
 };
 initializeApp();

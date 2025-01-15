@@ -4,8 +4,10 @@ import AdminProtected from "../hooks/adminProtected";
 import Heading from "../utils/Heading";
 import AdminSidebar from "../components/Admin/sidebar/AdminSideBar";
 import DashboardHero from "../components/Admin/DashboardHero";
+import { useGetProductCategoriesQuery } from "../../../redux/features/products/productsAPI";
 
-const page = () => {
+const Page = () => {
+  const {} = useGetProductCategoriesQuery(undefined);
   return (
     <AdminProtected>
       <Heading
@@ -25,4 +27,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

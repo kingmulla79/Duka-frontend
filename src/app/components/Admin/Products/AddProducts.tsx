@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { Button, InputLabel, TextField, Typography } from "@mui/material";
 import Rating from "@mui/material/Rating";
 import Image from "next/image";
-import UpdateIcon from "@mui/icons-material/Update";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 
 import { useGetProductCategoriesQuery } from "../../../../../redux/features/products/productsAPI";
 import Loader from "../../Loader/Loader";
@@ -74,7 +74,6 @@ const AddProducts = () => {
       stock,
       prod_photo: productPhoto,
     };
-    console.log(data);
     await newProducts(data);
   };
 
@@ -229,13 +228,13 @@ const AddProducts = () => {
                   </span>
                 )}
               </label>
-              <div className=" justify-center justify-items-center my-3 w-full">
+              <div className="flex justify-center mt-6 mb-10 w-full">
                 <Button
                   variant="contained"
-                  startIcon={<UpdateIcon />}
+                  startIcon={<CloudUploadIcon />}
                   onClick={handleSubmit}
                 >
-                  Update
+                  Upload Product details
                 </Button>
               </div>
             </div>
