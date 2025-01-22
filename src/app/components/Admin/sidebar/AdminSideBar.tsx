@@ -37,6 +37,11 @@ interface itemProps {
   setSelected: any;
 }
 
+interface Props {
+  isCollapsed: boolean;
+  setIsCollapsed: (isCollapsed: boolean) => void;
+}
+
 const Item: FC<itemProps> = ({ title, to, icon, selected, setSelected }) => {
   return (
     <MenuItem
@@ -50,19 +55,34 @@ const Item: FC<itemProps> = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const Sidebar = () => {
+const Sidebar: FC<Props> = ({ isCollapsed, setIsCollapsed }) => {
   const { user } = useSelector((state: any) => state.auth);
   const [logout, setlogout] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  // const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const [mounted, setMounted] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
+
   const { theme, setTheme } = useTheme();
   //skip logout query if logout button is not pressed
   const {} = useLogoutUserQuery(undefined, {
     skip: !logout ? true : false,
   });
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    function getSize() {
+      setWidth(window.innerWidth);
+      console.log(width);
+    }
+    setMounted(true);
+
+    if (width < 900) {
+      setIsCollapsed(true);
+    } else {
+      setIsCollapsed(false);
+    }
+    window.addEventListener("resize", getSize);
+  }, [width, setIsCollapsed]);
 
   if (!mounted) {
     return null;
@@ -110,13 +130,18 @@ const Sidebar = () => {
           height: "100vh",
           width: isCollapsed ? "0%" : "5%",
         }}
+        width={isCollapsed ? "0%" : "20%"}
       >
         <Menu iconShape="square">
           {/* LOGO AND MENU ICON */}
           <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
+            onClick={() => {
+              if (width > 900) {
+                setIsCollapsed(!isCollapsed);
+              }
+            }}
             icon={isCollapsed ? <ArrowForwardIosIcon /> : undefined}
-            style={{ margin: "10px 0 20px 0" }}
+            style={{ margin: "10px 0 0 0" }}
           >
             {!isCollapsed && (
               <Box
@@ -130,13 +155,14 @@ const Sidebar = () => {
                   Ecommerce
                 </h3>
                 {/* </Link> */}
-
-                <IconButton
-                  onClick={() => setIsCollapsed(!isCollapsed)}
-                  className="inline-block"
-                >
-                  <ArrowBackIosIcon className="text-black dark:text-[#ffffffc1]" />
-                </IconButton>
+                {width > 900 && (
+                  <IconButton
+                    onClick={() => setIsCollapsed(!isCollapsed)}
+                    className="inline-block"
+                  >
+                    <ArrowBackIosIcon className="text-black dark:text-[#ffffffc1]" />
+                  </IconButton>
+                )}
               </Box>
             )}
           </MenuItem>

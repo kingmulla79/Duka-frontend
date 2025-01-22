@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import AdminProtected from "../hooks/adminProtected";
 import Heading from "../utils/Heading";
 import AdminSidebar from "../components/Admin/sidebar/AdminSideBar";
@@ -8,6 +8,8 @@ import { useGetProductCategoriesQuery } from "../../../redux/features/products/p
 
 const Page = () => {
   const {} = useGetProductCategoriesQuery(undefined);
+  const [isCollapsed, setIsCollapsed] = useState(false);
+
   return (
     <AdminProtected>
       <Heading
@@ -17,7 +19,10 @@ const Page = () => {
       />
       <div className="flex h-[200vh]">
         <div className="1500px:w-[16%] w-1/5">
-          <AdminSidebar />
+          <AdminSidebar
+            isCollapsed={isCollapsed}
+            setIsCollapsed={setIsCollapsed}
+          />
         </div>
         <div className="w-[85%]">
           <DashboardHero isDashboard={true} />

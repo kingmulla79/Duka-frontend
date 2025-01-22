@@ -4,7 +4,7 @@ import AdminProtected from "../../hooks/adminProtected";
 import Heading from "../../utils/Heading";
 import AdminSidebar from "../../components/Admin/sidebar/AdminSideBar";
 import DashboardHero from "../../components/Admin/DashboardHero";
-import AddProducts from "../../components/Admin/Products/AddProducts";
+import Orders from "../../components/Admin/Orders/Orders";
 
 const Page = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -16,7 +16,7 @@ const Page = () => {
         keywords="Admin, Shop, Ecommerce, Products"
       />
       <div className="flex h-fit">
-        <div className="1500px:w-[16%] w-1/5">
+        <div className={isCollapsed ? "w-16" : "1500px:w-[16%] w-1/5"}>
           <AdminSidebar
             isCollapsed={isCollapsed}
             setIsCollapsed={setIsCollapsed}
@@ -24,7 +24,7 @@ const Page = () => {
         </div>
         <div className="w-[85%]">
           <DashboardHero isDashboard={true} />
-          <AddProducts />
+          <Orders />
         </div>
       </div>
     </AdminProtected>

@@ -1,12 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import AdminProtected from "../../hooks/adminProtected";
 import Heading from "../../utils/Heading";
 import AdminSidebar from "../../components/Admin/sidebar/AdminSideBar";
 import DashboardHero from "../../components/Admin/DashboardHero";
 import SearchProducts from "../../components/Admin/Products/SearchProducts";
 
-const page = () => {
+const Page = () => {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   return (
     <AdminProtected>
       <Heading
@@ -15,8 +16,11 @@ const page = () => {
         keywords="Admin, Shop, Ecommerce, Products"
       />
       <div className="flex h-fit">
-        <div className="1500px:w-[16%] w-1/5">
-          <AdminSidebar />
+        <div className={isCollapsed ? "w-16" : "1500px:w-[16%] w-1/5"}>
+          <AdminSidebar
+            isCollapsed={isCollapsed}
+            setIsCollapsed={setIsCollapsed}
+          />
         </div>
         <div className="w-[85%]">
           <DashboardHero isDashboard={true} />
@@ -27,4 +31,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
