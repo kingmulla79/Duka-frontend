@@ -14,6 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import UpdateIcon from "@mui/icons-material/Update";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import Image from "next/image";
@@ -130,7 +131,7 @@ const Page: FC<Props> = ({
         toast.error(errorData?.data?.message);
       }
     }
-  }, [updateError, updateSuccess]);
+  }, [editOpen, refetch, setEditOpen, updateError, updateSuccess]);
   return (
     <>
       {isLoading ? (
@@ -261,7 +262,7 @@ const Page: FC<Props> = ({
                     </span>
                   )}
                 </label>
-                <div className="flex justify-center mt-6 mb-10 w-full">
+                <div className="flex justify-around mt-6 mb-10 w-full">
                   <Button
                     variant="contained"
                     startIcon={<UpdateIcon />}
@@ -271,7 +272,7 @@ const Page: FC<Props> = ({
                   </Button>
                   <Button
                     variant="contained"
-                    startIcon={<UpdateIcon />}
+                    startIcon={<ArrowBackIcon />}
                     onClick={() => setEditOpen(!editOpen)}
                   >
                     Go back to data view

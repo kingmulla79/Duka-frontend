@@ -12,21 +12,10 @@ import {
   useUpdateProductMutation,
 } from "../../../../../redux/features/products/productsAPI";
 import EditProducts from "./EditProducts";
-import {
-  Box,
-  Button,
-  Dialog,
-  IconButton,
-  InputLabel,
-  Modal,
-  Rating,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, IconButton, Modal } from "@mui/material";
 import { useTheme } from "next-themes";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import UpdateIcon from "@mui/icons-material/Update";
 import { format } from "timeago.js";
 import toast from "react-hot-toast";
 import Loader from "../../Loader/Loader";
@@ -39,7 +28,6 @@ const SearchProducts = () => {
   const [open, setOpen] = useState(false);
   const [imageOpen, setImageOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
-  const [dragging, setDragging] = useState(false);
   const [categoryID, setCategoryID] = useState("");
   const [imageURL, setImageURL] = useState("");
   const [productName, setProductName] = useState("");
@@ -82,6 +70,7 @@ const SearchProducts = () => {
           onClick={() => {
             setImageURL(params.row.prod_url);
             setImageOpen(!editOpen);
+            setProductName(params.row.name);
           }}
         />
       ),
@@ -210,41 +199,6 @@ const SearchProducts = () => {
       });
   }
 
-  const imageHandler = async (e: any) => {
-    const fileReader = new FileReader();
-
-    fileReader.onload = () => {
-      if (fileReader.readyState === 2) {
-        const productImage = fileReader.result as string;
-        setImageURL(productImage);
-      }
-    };
-    fileReader.readAsDataURL(e.target.files[0]);
-  };
-
-  const handleDragOver = (e: any) => {
-    e.preventDefault();
-    setDragging(true);
-  };
-
-  const handleDragLeave = (e: any) => {
-    e.preventDefault();
-    setDragging(false);
-  };
-
-  const handleDrop = (e: any) => {
-    e.preventDefault();
-    setDragging(false);
-
-    const file = e.dataTransfer.files?.[0];
-    if (file) {
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        setImageURL(fileReader.result as string);
-      };
-      fileReader.readAsDataURL(file);
-    }
-  };
   const handleDelete = () => {
     deleteProduct(productId);
     setOpen(!open);
