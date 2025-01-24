@@ -72,7 +72,6 @@ const Sidebar: FC<Props> = ({ isCollapsed, setIsCollapsed }) => {
   useEffect(() => {
     function getSize() {
       setWidth(window.innerWidth);
-      console.log(width);
     }
     setMounted(true);
 

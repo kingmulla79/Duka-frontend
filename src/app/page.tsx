@@ -26,7 +26,11 @@ const Page: FC = () => {
         route={route}
         setRoute={setRoute}
       />
-      {user && <h1>Hello {user.username}</h1>}
+      {user && (
+        <h1 className="h-[200vh] w-full flex align-middle dark:text-white text-black text-2xl justify-center">
+          Hello {user.username}
+        </h1>
+      )}
     </div>
   );
 };
