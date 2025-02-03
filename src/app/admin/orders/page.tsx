@@ -23,8 +23,8 @@ const Page = () => {
           />
         </div>
         <div className="w-[85%]">
-          <DashboardHero isDashboard={true} />
-          <Orders />
+          <DashboardHero isDashboard={false} />
+          <Orders isDashboard={false} />
         </div>
       </div>
     </AdminProtected>

@@ -52,8 +52,19 @@ export const orderAPI = apiSlice.injectEndpoints({
         }
       },
     }),
+    getOrderAnalytics: builder.query({
+      query: () => ({
+        url: `order/get-order-analytics`,
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
-export const { useNewOrderMutation, useUserOrdersQuery, useAdminOrdersQuery } =
-  orderAPI;
+export const {
+  useNewOrderMutation,
+  useUserOrdersQuery,
+  useAdminOrdersQuery,
+  useGetOrderAnalyticsQuery,
+} = orderAPI;

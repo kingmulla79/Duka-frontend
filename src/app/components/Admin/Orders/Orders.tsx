@@ -2,13 +2,17 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { FC } from "react";
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 import { useTheme } from "next-themes";
 import { useAdminOrdersQuery } from "../../../../../redux/features/orders/orderAPI";
+import { format } from "timeago.js";
 
-const Orders = () => {
+type Props = {
+  isDashboard: boolean;
+};
+const Orders: FC<Props> = ({ isDashboard }) => {
   const { theme, setTheme } = useTheme();
   const { data, isLoading, isSuccess } = useAdminOrdersQuery({});
 
@@ -19,36 +23,54 @@ const Orders = () => {
       headerName: "ID",
       flex: 0.1,
     },
-    {
-      field: "user_id",
-      headerClassName: "MuiDataGrid-columnHeaders",
-      headerName: "User ID",
-      flex: 0.4,
-    },
+    ...(isDashboard
+      ? []
+      : [
+          {
+            field: "user_id",
+            headerClassName: "MuiDataGrid-columnHeaders",
+            headerName: "User ID",
+            flex: 0.4,
+          },
+        ]),
+
     {
       field: "total_order_price",
       headerClassName: "MuiDataGrid-columnHeaders",
       headerName: "Order Cost",
       flex: 0.7,
     },
-    {
-      field: "payment_service",
-      headerClassName: "MuiDataGrid-columnHeaders",
-      headerName: "Payment Service",
-      flex: 0.8,
-    },
-    {
-      field: "payment_method",
-      headerClassName: "MuiDataGrid-columnHeaders",
-      headerName: "Payment method",
-      flex: 1,
-    },
-    {
-      field: "order_status",
-      headerClassName: "MuiDataGrid-columnHeaders",
-      headerName: "Status",
-      flex: 0.5,
-    },
+    ...(isDashboard
+      ? []
+      : [
+          {
+            field: "payment_service",
+            headerClassName: "MuiDataGrid-columnHeaders",
+            headerName: "Payment Service",
+            flex: 0.8,
+          },
+        ]),
+    ...(isDashboard
+      ? []
+      : [
+          {
+            field: "payment_method",
+            headerClassName: "MuiDataGrid-columnHeaders",
+            headerName: "Payment method",
+            flex: 1,
+          },
+        ]),
+    ...(isDashboard
+      ? []
+      : [
+          {
+            field: "order_status",
+            headerClassName: "MuiDataGrid-columnHeaders",
+            headerName: "Status",
+            flex: 0.5,
+          },
+        ]),
+
     {
       field: "created_at",
       headerClassName: "MuiDataGrid-columnHeaders",
@@ -70,25 +92,33 @@ const Orders = () => {
           total_order_price: item.total_order_price,
           payment_service: item.payment_info.service,
           payment_method: item.payment_info.payment_method,
-          created_at: createdAt.toLocaleDateString("en-US", {
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          }),
+          created_at: isDashboard
+            ? format(createdAt)
+            : createdAt.toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              }),
         });
       });
   }
   return (
-    <div className="mt-[50px] min-h-screen">
-      <h2 className="dark:text-white text-[#000000c7] justify-center">
+    <div className={` ${isDashboard ? "mt-0" : "mt-[50px]"} h-fit`}>
+      <h2
+        className={`${
+          isDashboard
+            ? "hidden"
+            : "dark:text-white text-[#000000c7] justify-center"
+        }  `}
+      >
         <span className="flex w-full text-[60px] font-[500] font-Josefin justify-center">
           Order Data
         </span>
       </h2>
       <Box
-        m="20px"
-        height="80vh"
+        m={isDashboard ? "0 10px 0 0" : "20px"}
+        height={isDashboard ? "50vh" : "90vh"}
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -146,7 +176,7 @@ const Orders = () => {
         <DataGrid
           rows={rows}
           columns={columns}
-          slots={{ toolbar: GridToolbar }}
+          slots={isDashboard ? {} : { toolbar: GridToolbar }}
         />
       </Box>
     </div>

@@ -57,6 +57,13 @@ export const productAPI = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+    getProductAnalytics: builder.query({
+      query: () => ({
+        url: `prod/get-product-analytics`,
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
     deleteProduct: builder.mutation({
       query: (id) => ({
         url: `prod/delete-product/${id}`,
@@ -140,4 +147,5 @@ export const {
   useUpdateProductCategoryMutation,
   useDeleteProductCategoryMutation,
   useGetProductCategoriesQuery,
+  useGetProductAnalyticsQuery,
 } = productAPI;

@@ -102,6 +102,13 @@ export const authAPI = apiSlice.injectEndpoints({
         credentials: "include" as const,
       }),
     }),
+    getUserAnalytics: builder.query({
+      query: () => ({
+        url: `auth/get-users-analytics`,
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
     socialAuth: builder.mutation({
       query: (data) => ({
         url: "auth/social-auth",
@@ -196,4 +203,5 @@ export const {
   useDeleteUserMutation,
   useSendResetEmailMutation,
   useResetPasswordMutation,
+  useGetUserAnalyticsQuery,
 } = authAPI;

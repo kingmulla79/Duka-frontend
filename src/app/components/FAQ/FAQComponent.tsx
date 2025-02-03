@@ -29,8 +29,10 @@ const FAQComponent = () => {
       <h1 className={`${styles.title} 800px:text-[40px]`}>
         Frequently Asked Questions
       </h1>
-      <div className="mt-12">
+      <div className="mt-12 mb-20">
         <dl className="space-y-8">
+          {" "}
+          {/* description list */}
           {questions.map((q) => (
             <div
               key={q.id}
@@ -67,9 +69,6 @@ const FAQComponent = () => {
           ))}
         </dl>
       </div>
-      <br />
-      <br />
-      <br />
     </div>
   );
 };

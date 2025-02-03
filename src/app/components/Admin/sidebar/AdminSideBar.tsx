@@ -283,6 +283,13 @@ const Sidebar: FC<Props> = ({ isCollapsed, setIsCollapsed }) => {
               {!isCollapsed && "Analytics"}
             </Typography>
             <Item
+              title="Users Analytics"
+              to="/admin/users-analytics"
+              icon={<PeopleAltOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Product Analytics"
               to="/admin/product-analytics"
               icon={<BarChartOutlinedIcon />}
@@ -293,13 +300,6 @@ const Sidebar: FC<Props> = ({ isCollapsed, setIsCollapsed }) => {
               title="Order Analytics"
               to="/admin/order-analytics"
               icon={<PaymentsIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Users Analytics"
-              to="/admin/users-analytics"
-              icon={<PeopleAltOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

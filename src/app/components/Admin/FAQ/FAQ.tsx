@@ -10,9 +10,6 @@ import {
 } from "../../../../../redux/features/FAQ/FAQAPI";
 import toast from "react-hot-toast";
 import Loader from "../../Loader/Loader";
-import { HiMinus, HiPlus } from "react-icons/hi";
-import Collapse from "@mui/material/Collapse";
-import { styles } from "@/app/styles/style";
 import FAQComponent from "../../FAQ/FAQComponent";
 
 const FAQ = () => {
@@ -53,7 +50,7 @@ const FAQ = () => {
         <div className="w-full justify-center justify-items-center mt-16">
           <form onSubmit={handleSubmit} className="w-[65%]">
             <h2 className="text-black dark:text-white font-Poppins font-bold text-3xl mb-6">
-              Product form
+              FAQ form
             </h2>
             <div className="text-black dark:text-white w-full">
               <TextField

@@ -17,7 +17,7 @@ const Page = () => {
         description="The Admin page for the website"
         keywords="Admin, Shop, Ecommerce"
       />
-      <div className="flex h-[200vh]">
+      <div className="flex min-h-screen">
         <div className="1500px:w-[16%] w-1/5">
           <AdminSidebar
             isCollapsed={isCollapsed}
