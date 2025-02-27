@@ -105,6 +105,21 @@ export const productAPI = apiSlice.injectEndpoints({
         }
       },
     }),
+    productSearchNameFilter: builder.query({
+      query: () => ({
+        url: `prod/get-product-search-name`,
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+    productSearchResults: builder.query({
+      query: (search_name) => ({
+        url: `/prod/get-product-search-results/${search_name}`,
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+
     updateProductCategory: builder.mutation({
       query: (data) => ({
         url: `prod/update-product-category/${data.id}`,
@@ -148,4 +163,6 @@ export const {
   useDeleteProductCategoryMutation,
   useGetProductCategoriesQuery,
   useGetProductAnalyticsQuery,
+  useProductSearchNameFilterQuery,
+  useProductSearchResultsQuery,
 } = productAPI;

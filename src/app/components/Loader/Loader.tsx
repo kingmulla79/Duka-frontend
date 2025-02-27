@@ -1,10 +1,9 @@
 import React from "react";
-import "./Loader.css";
 
 const Loader = () => {
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="loader"></div>
+      <div className="text-black dark:text-white">Loading</div>
     </div>
   );
 };
