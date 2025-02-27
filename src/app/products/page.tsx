@@ -1,8 +1,8 @@
 "use client";
 import React, { FC, useState } from "react";
-import Heading from "./utils/Heading";
-import Header from "./components/Header";
-import Homepage from "./components/Home/Homepage";
+import Heading from "../utils/Heading";
+import Header from "../components/Header";
+import ProductView from "../components/products/ProductView";
 
 const Page: FC = () => {
   const [open, setOpen] = useState(false);
@@ -12,9 +12,9 @@ const Page: FC = () => {
   return (
     <div>
       <Heading
-        title="Ecommerce Homepage"
-        description="Ecommerce homepage"
-        keywords="Shop, home"
+        title="Ecommerce Products Page"
+        description="Ecommerce product display page"
+        keywords="Shop, products"
       />
       <Header
         open={open}
@@ -23,7 +23,7 @@ const Page: FC = () => {
         route={route}
         setRoute={setRoute}
       />
-      <Homepage />
+      <ProductView />
     </div>
   );
 };

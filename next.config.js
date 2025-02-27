@@ -4,7 +4,7 @@ const nextConfig = {
   minify: false,
   productionBrowserSourceMaps: false,
   concurrentFeatures: true,
-  fastRefresh: true,
+  fastRefresh: false,
   swcMinify: true,
   reactStrictMode: true,
   images: {

@@ -2,13 +2,18 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { BiMoon, BiSun } from "react-icons/bi";
+import { useColorScheme } from "@mui/material/styles";
 
 export const ThemeSwitcher = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { mode, setMode } = useColorScheme();
   useEffect(() => setMounted(true), []);
 
   if (!mounted) {
+    return null;
+  }
+  if (!mode) {
     return null;
   }
 
@@ -19,13 +24,19 @@ export const ThemeSwitcher = () => {
           className="cursor-pointer"
           fill="black"
           size={25}
-          onClick={() => setTheme("dark")}
+          onClick={() => {
+            setTheme("dark");
+            setMode("dark");
+          }}
         />
       ) : (
         <BiSun
           className="cursor-pointer"
           size={25}
-          onClick={() => setTheme("light")}
+          onClick={() => {
+            setTheme("light");
+            setMode("light");
+          }}
         />
       )}
     </div>

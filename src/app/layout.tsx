@@ -1,14 +1,22 @@
 "use client";
 import { Poppins } from "next/font/google";
 import { Josefin_Sans } from "next/font/google";
-import { ThemeProvider } from "./utils/theme-provider";
+import { NextThemeProvider } from "./utils/theme-provider";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { Providers } from "./Provider";
 import { SessionProvider } from "next-auth/react";
 import { useLoadUserQuery } from "../../redux/features/auth/authAPI";
 import Loader from "./components/Loader/Loader";
-import { CustomMUIThemeProvider } from "./utils/MUIThemeProvider";
+// import { CustomMUIThemeProvider } from "./utils/MUIThemeProvider";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+
+const theme = createTheme({
+  colorSchemes: {
+    dark: true,
+  },
+});
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -34,12 +42,17 @@ export default function RootLayout({
       >
         <Providers>
           <SessionProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <CustomMUIThemeProvider>
+            <NextThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+            >
+              <ThemeProvider theme={theme} disableTransitionOnChange>
+                <CssBaseline />
                 <Custom>{children}</Custom>
                 <Toaster position="top-center" reverseOrder={false} />
-              </CustomMUIThemeProvider>
-            </ThemeProvider>
+              </ThemeProvider>
+            </NextThemeProvider>
           </SessionProvider>
         </Providers>
       </body>
