@@ -17,30 +17,32 @@ const Categories = () => {
 
   const dispatch = useDispatch();
 
-  const category_data = data?.product_categories;
+  const category_data: [] = data?.product_categories;
+
+  const sliced_array = category_data?.slice(0, 5);
 
   return (
     <div className="pt-6 w-full">
       <h2 className="text-[25px] font-Poppins pl-5 py-5 font-extrabold text-black dark:text-white">
         Popular Categories
       </h2>
-      <div className="flex">
-        {category_data &&
-          category_data.map((item: any) => (
+      <div className="flex justify-between md:justify-around">
+        {sliced_array &&
+          sliced_array.map((item: any) => (
             <Link
               href={"/products"}
               key={item.category_id}
               onClick={() => dispatch(categorySelect(item.category_id))}
             >
-              <div className="w-full px-3 overflow-hidden justify-around justify-items-center">
+              <div className="w-full px-3 overflow-hidden justify-items-center">
                 <Image
                   src={item.category_url}
                   alt=""
                   width={120}
                   height={120}
-                  className="w-[120px] h-[120px] object-cover cursor-pointer border-[3px] rounded-full"
+                  className="w-[60px] h-[60px] md:w-[100px] md:h-[100px] object-cover cursor-pointer border-[3px] rounded-full"
                 />
-                <div className="text-[15px] font-Poppins text-center">
+                <div className="text-[10px] md:text-[14px] font-Poppins text-center">
                   {item.category_name}
                 </div>
               </div>

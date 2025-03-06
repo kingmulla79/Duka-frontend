@@ -1,73 +1,67 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { styles } from "@/app/styles/style";
-import React, { useEffect, useState } from "react";
-import { HiMinus, HiPlus } from "react-icons/hi";
+import React, { FC, useEffect, useState } from "react";
 import { useGetFAQsQuery } from "../../../../redux/features/FAQ/FAQAPI";
-import Collapse from "@mui/material/Collapse";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
-const FAQComponent = () => {
+type Props = {
+  homepage?: boolean;
+};
+const FAQComponent: FC<Props> = ({ homepage }) => {
   const { data } = useGetFAQsQuery(undefined, {
     skip: false,
     refetchOnMountOrArgChange: true,
   });
 
-  const [activeQuestion, setActiveQuestion] = useState(null);
   const [questions, setQuestions] = useState<any[]>([]);
+  const [expanded, setExpanded] = React.useState<string | false>(false);
+
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false);
+    };
 
   useEffect(() => {
     if (data) {
       setQuestions(data?.FAQs);
     }
-  }, [data]);
-
-  const toggleQuestion = (id: any) => {
-    setActiveQuestion(activeQuestion === id ? null : id);
-  };
+    if (homepage) {
+      setQuestions(data?.FAQs.slice(0, 9));
+    }
+  }, [data, homepage]);
 
   return (
-    <div className="w-[90%] 800px:w-[80%] m-auto">
-      <h1 className={`${styles.title} 800px:text-[40px]`}>
+    <div className="w-[90%] 800px:w-[80%] m-auto mt-4">
+      <h1
+        className={`text-[25px] font-Poppins pl-5 py-5 font-extrabold text-black dark:text-white text-center`}
+      >
         Frequently Asked Questions
       </h1>
-      <div className="mt-12 mb-20">
-        <dl className="space-y-8">
-          {" "}
-          {/* description list */}
-          {questions.map((q) => (
-            <div
-              key={q.id}
-              className={`${
-                q.id !== questions[0]?.id && "border-t"
-              } border-gray-200 pt-6`}
+      <div className="mt-4 mb-6">
+        {questions?.map((q) => (
+          <Accordion
+            key={q.id}
+            expanded={expanded === q.id}
+            onChange={handleChange(q.id)}
+          >
+            <AccordionSummary
+              expandIcon={<ArrowDropDownIcon />}
+              aria-controls="panel2-content"
+              id="panel2-header"
             >
-              <dt className="text-lg">
-                <button
-                  className="flex items-start justify-between w-full text-left focus:outline-none"
-                  onClick={() => toggleQuestion(q.id)}
-                >
-                  <span className="font-medium text-black dark:text-white">
-                    {q.question}
-                  </span>
-                  <span className="ml-6 flex-shrink-0">
-                    {activeQuestion === q.id ? (
-                      <HiMinus className="h-6 w-6 text-black dark:text-white" />
-                    ) : (
-                      <HiPlus className="h-6 w-6 text-black dark:text-white" />
-                    )}
-                  </span>
-                </button>
-              </dt>
-
-              <Collapse in={activeQuestion === q.id}>
-                <dd className="mt-2 pr-12">
-                  <p className="text-base font-Poppins text-black dark:text-white">
-                    {q.answer}
-                  </p>
-                </dd>
-              </Collapse>
-            </div>
-          ))}
-        </dl>
+              <span className="text-[12px] md:text-[15px] font-semibold font-Poppins text-black dark:text-white">
+                {q.question}
+              </span>
+            </AccordionSummary>
+            <AccordionDetails>
+              <p className="text-[12px] md:text-[15px] font-Poppins text-black dark:text-white">
+                {q.answer}
+              </p>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </div>
     </div>
   );
