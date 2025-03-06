@@ -1,8 +1,11 @@
 import Link from "next/link";
 import React from "react";
-import { FaYoutube } from "react-icons/fa6";
-import { FaSquareInstagram } from "react-icons/fa6";
-import { FaGithub } from "react-icons/fa6";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import BusinessIcon from "@mui/icons-material/Business";
+import EmailIcon from "@mui/icons-material/Email";
 
 const Footer = () => {
   return (
@@ -11,7 +14,7 @@ const Footer = () => {
         <div className="border border-[#0000000e] dark:border-[#ffffff1c]" />
         <br />
         <div className="w-[95%] 800px:w-full 800px:max-w-[85%] mx-auto px-2 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
+          <div className="flex flex-col text-center place-content-center sm:grid gap-8 sm:grid-cols-2 md:flex md:flex-row md:justify-between md:text-left">
             <div className="space-y-3">
               <h3 className="text-[20px] font-[600] text-black dark:text-white">
                 About
@@ -20,7 +23,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/about"
-                    className="text-base text-black dark:text-gray-300 dark:hover:text-white"
+                    className="text-[13px] sm:text-[16px] md:text-[16px] text-black dark:text-gray-300 dark:hover:text-white"
                   >
                     Our Story
                   </Link>
@@ -28,7 +31,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/privacy-policy"
-                    className="text-base text-black dark:text-gray-300 dark:hover:text-white"
+                    className="text-[13px] sm:text-[16px] md:text-[16px] text-black dark:text-gray-300 dark:hover:text-white"
                   >
                     Privacy Policy
                   </Link>
@@ -36,7 +39,7 @@ const Footer = () => {
                 <li>
                   <Link
                     href="/faq"
-                    className="text-base text-black dark:text-gray-300 dark:hover:text-white"
+                    className="text-[13px] sm:text-[16px] md:text-[16px] text-black dark:text-gray-300 dark:hover:text-white"
                   >
                     FAQ
                   </Link>
@@ -48,30 +51,22 @@ const Footer = () => {
                 Quick Links
               </h3>
               <ul className="space-y-4">
-                {/* <li>
-                  <Link
-                    href="/papers"
-                    className="text-base text-black dark:text-gray-300 dark:hover:text-white"
-                  >
-                    Papers
-                  </Link>
-                </li> */}
                 <li>
                   <Link
                     href="/profile"
-                    className="text-base text-black dark:text-gray-300 dark:hover:text-white"
+                    className="text-[13px] sm:text-[16px] md:text-[16px] text-black dark:text-gray-300 dark:hover:text-white"
                   >
                     My Account
                   </Link>
                 </li>
-                {/* <li>
+                <li>
                   <Link
-                    href="/paper-dashboard"
-                    className="text-base text-black dark:text-gray-300 dark:hover:text-white"
+                    href="/"
+                    className="text-[13px] sm:text-[16px] md:text-[16px] text-black dark:text-gray-300 dark:hover:text-white"
                   >
-                    Dashboard
+                    Home
                   </Link>
-                </li> */}
+                </li>
               </ul>
             </div>
             <div className="space-y-3">
@@ -81,35 +76,26 @@ const Footer = () => {
               <ul className="space-y-4">
                 <li>
                   <Link
-                    href="https://www.youtube.com/channel/UCMmy1Qfc4szvYAfxa_bcPyQ"
-                    className="text-base text-black dark:text-gray-300 dark:hover:text-white flex flex-row"
+                    href="https://www.youtube.com"
+                    className="text-[13px] sm:text-[16px] md:text-[16px] text-black dark:text-gray-300 dark:hover:text-white"
                   >
-                    <div className="align-middle pt-1">
-                      <FaYoutube />
-                    </div>{" "}
-                    <p className="pl-2">Youtube</p>
+                    <YouTubeIcon /> Youtube
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="https://www.instagram.com/kenyattauniversity/"
-                    className="text-base text-black dark:text-gray-300 dark:hover:text-white flex flex-row"
+                    href="https://www.instagram.com/"
+                    className="text-[13px] sm:text-[16px] md:text-[16px] text-black dark:text-gray-300 dark:hover:text-white"
                   >
-                    <div className="align-middle pt-1">
-                      <FaSquareInstagram />
-                    </div>{" "}
-                    <p className="pl-2">Instagram</p>
+                    <InstagramIcon /> Instagram
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="https://github.com/kingmulla79"
-                    className="text-base text-black dark:text-gray-300 dark:hover:text-white flex flex-row"
+                    className="text-[13px] sm:text-[16px] md:text-[16px] text-black dark:text-gray-300 dark:hover:text-white"
                   >
-                    <div className="align-middle pt-1">
-                      <FaGithub />
-                    </div>
-                    <div className="pl-2">Github</div>
+                    <GitHubIcon /> Github
                   </Link>
                 </li>
               </ul>
@@ -118,17 +104,17 @@ const Footer = () => {
               <h3 className="text-[20px] font-[600] text-black dark:text-white pb-3">
                 Contact Info
               </h3>
-              <p className="text-base text-black dark:text-gray-300 dark:hover:text-white pb-2">
-                Call Us: +254740455275
+              <p className="text-[13px] sm:text-[16px] md:text-[16px] text-black dark:text-gray-300 dark:hover:text-white pb-2">
+                <LocalPhoneIcon /> +254740455275
               </p>
 
-              <p className="text-base text-black dark:text-gray-300 dark:hover:text-white pb-2">
+              <p className="text-[13px] sm:text-[16px] md:text-[16px] text-black dark:text-gray-300 dark:hover:text-white pb-2">
                 {" "}
-                Address: Ofafa Jericho Along Shule Road,
+                <BusinessIcon /> Ofafa Jericho Along Shule Road
               </p>
-              <p className="text-base text-black dark:text-gray-300 dark:hover:text-white pb-2">
+              <p className="text-[13px] sm:text-[16px] md:text-[16px] text-black dark:text-gray-300 dark:hover:text-white pb-2">
                 <a href="mailto:prelovedbagske@outlook.com">
-                  thomasodhiambo800@gmail.com
+                  <EmailIcon /> thomasodhiambo800@gmail.com
                 </a>
               </p>
             </div>

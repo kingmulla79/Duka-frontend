@@ -2,6 +2,9 @@ import React from "react";
 import Hero from "./Hero";
 import SearchPanel from "./SearchPanel";
 import Categories from "./Categories";
+import FAQComponent from "../FAQ/FAQComponent";
+import Footer from "../Footer";
+import Showcase from "./Showcase";
 
 const Homepage = () => {
   return (
@@ -9,6 +12,9 @@ const Homepage = () => {
       <SearchPanel />
       <Hero />
       <Categories />
+      <Showcase />
+      <FAQComponent homepage={true} />
+      <Footer />
     </div>
   );
 };
