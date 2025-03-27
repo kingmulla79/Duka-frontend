@@ -30,12 +30,3 @@ const Page = ({ params }: { params: Promise<{ searchValue: string }> }) => {
 };
 
 export default Page;
-
-// import React from "react";
-
-// const Page = async ({ params }: { params: { searchValue: string } }) => {
-//   const { searchValue } = await params;
-//   return <div>page {searchValue.replace(/%20/g, " ")}</div>;
-// };
-
-// export default Page;

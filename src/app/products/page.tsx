@@ -12,7 +12,6 @@ const Page: FC = () => {
   const [activeItem] = useState(0);
   const { category_id } = useSelector((state: any) => state.products);
 
-  console.log(category_id);
   return (
     <div>
       <Heading

@@ -22,12 +22,13 @@ import {
   PeopleAltOutlinedIcon,
 } from "./Icon";
 import avatarDefault from "../../../../../public/assets/avatar.jpg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useLogoutUserQuery } from "../../../../../redux/features/auth/authAPI";
 import { redirect } from "next/navigation";
+import { clearCart } from "../../../../../redux/features/products/productsSlice";
 
 interface itemProps {
   title: string;
@@ -69,6 +70,8 @@ const Sidebar: FC<Props> = ({ isCollapsed, setIsCollapsed }) => {
     skip: !logout ? true : false,
   });
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     function getSize() {
       setWidth(window.innerWidth);
@@ -90,6 +93,8 @@ const Sidebar: FC<Props> = ({ isCollapsed, setIsCollapsed }) => {
   const logOutHandler = async () => {
     setlogout(true);
     await signOut(); // will give a reload, should be done in case of social-authentication
+    dispatch(clearCart());
+    localStorage.removeItem("cart");
     redirect("/");
   };
 

@@ -25,11 +25,11 @@ const Categories = () => {
   const sliced_array = product_data?.slice(0, 5);
 
   return (
-    <div className="pt-6 w-full">
+    <div className="py-12 w-full">
       <h2 className="text-[25px] text-center font-Poppins pl-5 py-3 font-extrabold text-black dark:text-white">
         Product Showcase
       </h2>
-      <div className="flex flex-col 1000px:flex 1000px:flex-row justify-between px-5 items-center">
+      <div className="flex flex-col 1000px:flex 1000px:flex-row justify-between px-5 md:px-10 items-center">
         {sliced_array &&
           sliced_array.map((item: any) => (
             <Link href={`/products/${item.search_name}`} key={item.id}>

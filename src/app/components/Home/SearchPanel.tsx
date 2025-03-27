@@ -35,7 +35,7 @@ const SearchPanel = () => {
   }
 
   return (
-    <div className="w-full py-5 text-black dark:text-white">
+    <div className="w-full pb-5 text-black dark:text-white">
       <form onSubmit={handleSearch}>
         <div className="flex justify-center">
           <Autocomplete

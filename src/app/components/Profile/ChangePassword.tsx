@@ -4,7 +4,7 @@
 import { useUpdatePasswordMutation } from "../../../../redux/features/auth/authAPI";
 import React, { FC, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { Button } from "@mui/material";
+import { Button, InputAdornment } from "@mui/material";
 import UpdateIcon from "@mui/icons-material/Update";
 import TextField from "@mui/material/TextField";
 import IconButton from "@mui/material/IconButton";
@@ -73,14 +73,26 @@ const ChangePassword: FC = () => {
               value={oldPassword}
               type={showOldPsw ? "text" : "password"}
               onChange={(e) => setOldPassword(e.target.value)}
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="password-visibility"
+                        onClick={() => setShowOldPsw(!showOldPsw)}
+                        className={`absolute cursor-pointer text-black dark:text-white`}
+                      >
+                        {showOldPsw ? (
+                          <VisibilityOffIcon />
+                        ) : (
+                          <VisibilityIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
+              }}
             />
-            <IconButton
-              aria-label="password-visibility"
-              onClick={() => setShowOldPsw(!showOldPsw)}
-              className={`absolute cursor-pointer text-black dark:text-white`}
-            >
-              {showOldPsw ? <VisibilityOffIcon /> : <VisibilityIcon />}
-            </IconButton>
           </div>
           <div className="w-[100%] 800px:w-[60%] flex justify-items-center mt-5">
             <TextField
@@ -91,14 +103,26 @@ const ChangePassword: FC = () => {
               value={newPassword}
               type={showNewPsw ? "text" : "password"}
               onChange={(e) => setNewPassword(e.target.value)}
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="password-visibility"
+                        onClick={() => setShowNewPsw(!showNewPsw)}
+                        className={`absolute cursor-pointer text-black dark:text-white`}
+                      >
+                        {showNewPsw ? (
+                          <VisibilityOffIcon />
+                        ) : (
+                          <VisibilityIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
+              }}
             />
-            <IconButton
-              aria-label="password-visibility"
-              onClick={() => setShowNewPsw(!showNewPsw)}
-              className={`absolute cursor-pointer text-black dark:text-white`}
-            >
-              {showNewPsw ? <VisibilityOffIcon /> : <VisibilityIcon />}
-            </IconButton>
           </div>
           <div className="w-[100%] 800px:w-[60%] flex justify-items-center mt-5">
             <TextField
@@ -109,14 +133,26 @@ const ChangePassword: FC = () => {
               value={confirmPassword}
               type={showCnfPwd ? "text" : "password"}
               onChange={(e) => setConfirmPassword(e.target.value)}
+              slotProps={{
+                input: {
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="password-visibility"
+                        onClick={() => setShowCnfPsw(!showCnfPwd)}
+                        className={`absolute cursor-pointer text-black dark:text-white`}
+                      >
+                        {showCnfPwd ? (
+                          <VisibilityOffIcon />
+                        ) : (
+                          <VisibilityIcon />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                },
+              }}
             />
-            <IconButton
-              aria-label="password-visibility"
-              onClick={() => setShowCnfPsw(!showCnfPwd)}
-              className={`absolute cursor-pointer text-black dark:text-white`}
-            >
-              {showCnfPwd ? <VisibilityOffIcon /> : <VisibilityIcon />}
-            </IconButton>
           </div>
 
           <div className="w-[100%] 800px:w-[60%] relative mt-5">

@@ -9,6 +9,8 @@ import ProfileInfo from "./ProfileInfo";
 import ChangePassword from "./ChangePassword";
 import OrderProfile from "./OrderProfile";
 import { useUserOrdersQuery } from "../../../../redux/features/orders/orderAPI";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../../../../redux/features/products/productsSlice";
 
 type Props = {
   user: any;
@@ -19,6 +21,7 @@ const Profile: FC<Props> = ({ user }) => {
   const [avatar, setAvatar] = useState(null); //user may not have avatar attribute
   const [active, setActive] = useState(1);
   const [logout, setLogout] = useState(false);
+  const dispatch = useDispatch();
 
   //skip logout query if logout button is not pressed
   const {} = useLogoutUserQuery(undefined, {
@@ -29,6 +32,8 @@ const Profile: FC<Props> = ({ user }) => {
   const logOutHandler = async () => {
     setLogout(true);
     await signOut(); // will give a reload, should be done in case of social-authentication
+    dispatch(clearCart());
+    localStorage.removeItem("cart");
     redirect("/");
   };
 

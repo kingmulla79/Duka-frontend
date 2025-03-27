@@ -155,6 +155,14 @@ export const productAPI = apiSlice.injectEndpoints({
         }
       },
     }),
+    stripeIntent: builder.mutation({
+      query: (data) => ({
+        url: "prod/payment-intent",
+        method: "POST",
+        body: data,
+        credentials: "include" as const,
+      }),
+    }),
   }),
 });
 
@@ -172,4 +180,5 @@ export const {
   useProductSearchNameFilterQuery,
   useProductSearchResultsQuery,
   useProductAbstractFilterQuery,
+  useStripeIntentMutation,
 } = productAPI;

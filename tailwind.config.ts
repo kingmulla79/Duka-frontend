@@ -17,6 +17,9 @@ export default {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        shopping247: 'url("/assets/homeanimation1.jpg")',
+        saletag: 'url("/assets/homeanimation4.jpg")',
+        personalized: 'url("/assets/personalizedshopping.jpg")',
       },
       screens: {
         "1000px": "1000px",

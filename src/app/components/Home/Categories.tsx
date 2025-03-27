@@ -8,9 +8,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import { categorySelect } from "../../../../redux/features/products/productsSlice";
+import Skeleton from "@mui/material/Skeleton";
 
 const Categories = () => {
-  const { data } = useGetProductCategoriesQuery(undefined, {
+  const { data, isLoading } = useGetProductCategoriesQuery(undefined, {
     skip: false,
     refetchOnMountOrArgChange: true,
   });
@@ -23,10 +24,11 @@ const Categories = () => {
 
   return (
     <div className="pt-6 w-full">
-      <h2 className="text-[25px] font-Poppins pl-5 py-5 font-extrabold text-black dark:text-white">
+      <h2 className="text-[25px] font-Poppins text-center py-5 font-extrabold text-black dark:text-white">
         Popular Categories
       </h2>
       <div className="flex justify-between md:justify-around">
+        {isLoading && <Skeleton variant="circular" width={40} height={40} />}
         {sliced_array &&
           sliced_array.map((item: any) => (
             <Link

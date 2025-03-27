@@ -37,7 +37,7 @@ const Verification: FC<Props> = ({ setRoute }) => {
         toast.error(errorData?.data?.message);
         setInvalidError(true);
       } else {
-        console.log("An error occured", error);
+        toast.error("An error occured");
       }
     }
   }, [error, isSuccess, setRoute]);
@@ -56,7 +56,6 @@ const Verification: FC<Props> = ({ setRoute }) => {
     3: "",
   });
   const VerificationHandler = async () => {
-    console.log("Test");
     const verificationNumber = Object.values(verifyNumber).join("");
     if (verificationNumber.length !== 4) {
       setInvalidError(true);

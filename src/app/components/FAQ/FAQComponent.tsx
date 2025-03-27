@@ -33,9 +33,11 @@ const FAQComponent: FC<Props> = ({ homepage }) => {
   }, [data, homepage]);
 
   return (
-    <div className="w-[90%] 800px:w-[80%] m-auto mt-4">
+    <div
+      className={`w-[90%] 800px:w-[80%] m-auto ${homepage && "!mt-1"} mt-4 `}
+    >
       <h1
-        className={`text-[25px] font-Poppins pl-5 py-5 font-extrabold text-black dark:text-white text-center`}
+        className={`text-[25px] font-Poppins pl-5 !pb-4 font-extrabold text-black dark:text-white text-center`}
       >
         Frequently Asked Questions
       </h1>

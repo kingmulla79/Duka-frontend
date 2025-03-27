@@ -20,7 +20,9 @@ import {
   useSocialAuthMutation,
 } from "../../../redux/features/auth/authAPI";
 import toast from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Badge from "@mui/material/Badge";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 interface Props {
   open: boolean;
@@ -32,7 +34,7 @@ interface Props {
 const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
   // const [active, setActive] = useState(false);
   const [openSideBar, setOpenSidebar] = useState(false);
-
+  const { cart } = useSelector((state: any) => state.products);
   const { user } = useSelector((state: any) => state.auth);
   //data from social authentication session
   const { data } = useSession();
@@ -45,6 +47,7 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
   const {} = useLogoutUserQuery(undefined, {
     skip: !logout ? true : false,
   });
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!user) {
@@ -67,7 +70,7 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
     if (data === null && !user) {
       setlogout(true);
     }
-  }, [data, isSuccess, refetch, socialAuth, user]);
+  }, [data, dispatch, isSuccess, refetch, socialAuth, user]);
 
   // if (typeof window !== "undefined") {
   //   window.addEventListener("scroll", () => {
@@ -103,6 +106,11 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
             </div>
             <div className="flex items-center">
               <NavItems isMobile={false} />
+              <Link href={"/cart"}>
+                <Badge badgeContent={cart.totalQty} color="primary">
+                  <ShoppingCartIcon className="dark:text-white text-black" />
+                </Badge>
+              </Link>
               <ThemeSwitcher />
               {/* only for mobile devices*/}
               <div className="800px:hidden pr-3">

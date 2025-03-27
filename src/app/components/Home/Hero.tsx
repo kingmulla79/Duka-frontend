@@ -4,7 +4,7 @@ import { BannerImages } from "./images";
 
 const Hero = () => {
   return (
-    <div className="w-[95%] mx-auto">
+    <div className="w-[85%] pt-12 mx-auto">
       <Carousel slides={BannerImages}></Carousel>
     </div>
   );

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from "./features/api/apiSlice";
@@ -6,6 +7,12 @@ import orderSlice from "./features/orders/ordersSlice";
 import productsSlice from "./features/products/productsSlice";
 import { authAPI } from "./features/auth/authAPI";
 import { productAPI } from "./features/products/productsAPI";
+
+const saveProductState = (state: any) => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("cart", JSON.stringify(state.products));
+  }
+};
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +24,10 @@ export const store = configureStore({
   devTools: false, // disables redux devtools
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
+});
+
+store.subscribe(() => {
+  saveProductState(store.getState());
 });
 
 // call the refresh token on every page load
