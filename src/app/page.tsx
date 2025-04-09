@@ -12,9 +12,9 @@ const Page: FC = () => {
   return (
     <div>
       <Heading
-        title="Ecommerce Homepage"
-        description="Ecommerce homepage"
-        keywords="Shop, home"
+        title="Duka Homepage"
+        description="Duka homepage"
+        keywords="Shop, Duka, Homepage, Landing Page"
       />
       <Header
         open={open}

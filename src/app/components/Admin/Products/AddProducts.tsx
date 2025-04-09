@@ -22,6 +22,7 @@ const AddProducts = () => {
   const [rating, setRating] = useState<number | null>(2);
   const [stock, setStock] = useState("");
   const [productPhoto, setProductPhoto] = useState("");
+  const [searchName, setSearchName] = useState("");
   const categories: any = [];
 
   const { data } = useGetProductCategoriesQuery({});
@@ -73,6 +74,7 @@ const AddProducts = () => {
       rating,
       stock,
       prod_photo: productPhoto,
+      search_name: searchName,
     };
     await newProducts(data);
   };
@@ -89,6 +91,7 @@ const AddProducts = () => {
       setRating(2);
       setStock("");
       setProductPhoto("");
+      setSearchName("");
       toast.success("Product successfully added");
     }
     if (error) {
@@ -143,6 +146,17 @@ const AddProducts = () => {
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
                 fullWidth
+              />
+            </div>
+            <div className="text-black dark:text-white w-full my-4">
+              <TextField
+                id="price"
+                label="Product search name tag"
+                variant="filled"
+                placeholder="Enter the product search name"
+                fullWidth
+                value={searchName}
+                onChange={(e) => setSearchName(e.target.value)}
               />
             </div>
             <div className="text-black dark:text-white w-full my-4">

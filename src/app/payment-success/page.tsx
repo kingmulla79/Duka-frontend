@@ -63,7 +63,8 @@ export default function PaymentSuccess() {
 
   const NewOrder = async () => {
     const payment_info = {
-      payment_method: "stripe",
+      service: "stripe",
+      payment_method: "credit card",
       payment_intent,
       payment_intent_client_secret,
       redirect_status,
@@ -119,8 +120,8 @@ export default function PaymentSuccess() {
   return (
     <div>
       <Heading
-        title="Ecommerce Products Page"
-        description="Ecommerce product display page"
+        title="Duka Products Page"
+        description="Duka product display page"
         keywords="Shop, products"
       />
       <Header

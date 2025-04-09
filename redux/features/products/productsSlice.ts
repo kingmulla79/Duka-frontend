@@ -69,6 +69,9 @@ const productsSlice = createSlice({
     categorySelect: (state, action) => {
       state.category_id = action.payload;
     },
+    categoryClear: (state) => {
+      state.category_id = "";
+    },
     addItem: (state, action: PayloadAction<IItems>) => {
       const {
         id,
@@ -140,6 +143,7 @@ export const {
   updateProducts,
   allCategories,
   categorySelect,
+  categoryClear,
   addItem,
   removeItem,
   updateQuantity,

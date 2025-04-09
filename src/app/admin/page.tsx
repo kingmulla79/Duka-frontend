@@ -13,9 +13,9 @@ const Page = () => {
   return (
     <AdminProtected>
       <Heading
-        title="Ecommerce Admin Page"
+        title="Duka Admin Page"
         description="The Admin page for the website"
-        keywords="Admin, Shop, Ecommerce"
+        keywords="Admin, Shop, Duka"
       />
       <div className="flex min-h-screen">
         <div className="1500px:w-[16%] w-1/5">

@@ -22,9 +22,9 @@ const page: FC = () => {
   return (
     <Protected>
       <Heading
-        title={`${user.username} profile - Ecommerce`}
-        description="Ecommerce profile page for users"
-        keywords="Profile, Ecommerce Profile"
+        title={`${user.username} profile - Duka`}
+        description="Duka profile page for users"
+        keywords="Profile, Duka Profile"
       />
       <div className="min-h-screen">
         <Header

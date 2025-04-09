@@ -101,7 +101,7 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
                 href={"/"}
                 className={`text-[25px] font-Poppins font-[500] text-black dark:text-white`}
               >
-                Ecommerce
+                Duka
               </Link>
             </div>
             <div className="flex items-center">
@@ -183,7 +183,7 @@ const Header: FC<Props> = ({ activeItem, open, setOpen, route, setRoute }) => {
               </div>
               <br />
               <p className="text-[16px] px-2 pl-5 text-black dark:text-white">
-                Ecommerce © 2023-2024
+                Duka © 2023-2024
               </p>
             </div>
           </div>
