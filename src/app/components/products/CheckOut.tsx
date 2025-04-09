@@ -10,9 +10,7 @@ import {
 } from "@stripe/react-stripe-js";
 import convertToSubcurrency from "../../../../lib/convertToSubcurrency";
 import { Box, Button, Modal } from "@mui/material";
-import { useNewOrderMutation } from "../../../../redux/features/orders/orderAPI";
 import toast from "react-hot-toast";
-import { clearCart } from "../../../../redux/features/products/productsSlice";
 import Loader from "../Loader/Loader";
 
 type Props = {
@@ -24,7 +22,6 @@ type Props = {
 const CheckOut: FC<Props> = ({ amount, open, setOpen }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const [orderPayment, { isSuccess, error, data }] = useNewOrderMutation();
 
   const [errorMessage, setErrorMessage] = useState<string>();
   const [clientSecret, setClientSecret] = useState("");

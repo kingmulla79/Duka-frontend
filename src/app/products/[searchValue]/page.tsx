@@ -13,8 +13,8 @@ const Page = ({ params }: { params: Promise<{ searchValue: string }> }) => {
   return (
     <div>
       <Heading
-        title="Ecommerce Products Search Page"
-        description="Ecommerce product search results display page"
+        title="Duka Products Search Page"
+        description="Duka product search results display page"
         keywords="Shop, products, personalized search"
       />
       <Header

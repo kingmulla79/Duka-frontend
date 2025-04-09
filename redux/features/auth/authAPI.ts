@@ -1,7 +1,12 @@
 /* eslint-disable @typescript-eslint/no-empty-object-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { apiSlice } from "../api/apiSlice";
-import { userLoggedIn, userLoggedOut, userRegistration } from "./authSlice";
+import {
+  userList,
+  userLoggedIn,
+  userLoggedOut,
+  userRegistration,
+} from "./authSlice";
 
 type RegistrationResponse = {
   message: string;
@@ -101,6 +106,15 @@ export const authAPI = apiSlice.injectEndpoints({
         method: "GET",
         credentials: "include" as const,
       }),
+      async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+          //from the reducer to change the global state to include fetched values
+          dispatch(userList({ userList: result.data.users }));
+        } catch (error: any) {
+          console.log(error);
+        }
+      },
     }),
     getUserAnalytics: builder.query({
       query: () => ({

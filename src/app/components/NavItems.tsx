@@ -50,7 +50,7 @@ const NavItems: React.FC<Props> = ({ isMobile }) => {
               <span
                 className={`text-[25px] font-Poppins font-[500] text-black dark:text-white`}
               >
-                Ecommerce
+                Duka
               </span>
             </Link>
           </div>

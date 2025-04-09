@@ -13,8 +13,8 @@ const Page: FC = () => {
   return (
     <div>
       <Heading
-        title="Ecommerce Cart Page"
-        description="Ecommerce cart display page"
+        title="Duka Cart Page"
+        description="Duka cart display page"
         keywords="Shop, products, cart, checkout"
       />
       <Header

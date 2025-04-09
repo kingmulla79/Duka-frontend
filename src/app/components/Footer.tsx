@@ -121,7 +121,7 @@ const Footer = () => {
           </div>
           <br />
           <p className="text-center text-black dark:text-white">
-            Copyright © 2025 Ecommerce | All Rights Reserved
+            Copyright © 2025 Duka | All Rights Reserved
           </p>
         </div>
         <br />
